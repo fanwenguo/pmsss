@@ -1,0 +1,87 @@
+body,html,#wrap{
+	width: 100%;
+	height: 100%;
+}
+#wrap{
+	display: flex;
+	flex-direction: column;
+}
+.header{
+	height: 40px;
+	background: #323136;
+}
+.header span ,.header h2{
+	height: 100%;
+}
+.header h2{
+	color:#fff;
+	font-size: 18px;
+	margin: 0;
+	line-height: 40px;
+}
+.back{
+	display: block;
+	width: 28px;
+	height: 28px;
+	border-radius: 14px;
+	border:1px solid #fff;
+	text-align: center;
+	line-height: 30px;
+	background: none;
+	color:#fff;
+	font-size:20px;
+	margin-top:6px;
+}
+.nav{
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	padding-left:30px;
+	padding-right:30px;
+	border-bottom: 1px solid #eee;
+	font-size: 16px;
+	position: relative;
+}
+.nav a{
+	color:#999;
+	text-decoration: none;
+}
+.nav .line{
+	position: absolute;
+	height: 2px;
+	width: 30%;
+	left:30px;
+	bottom: 0;
+	background: #33bdad;
+	transition: transform .3s;
+}
+.bottom{
+	flex:1;
+	width: 100%;
+	overflow: hidden;
+}
+.swiper-container,.swiper-wrapper,.swiper-slide{
+	height: 100%;
+	
+}
+.swiper-slide{
+	padding: 20px 5px;
+	position: relative;
+}
+.swiper-slide:nth-child(2){
+	background: pink
+}
+.swiper-slide dl dt img{
+	width: 100%;
+	height: auto;
+}
+.swiper-slide h3{
+	text-overflow:ellipsis;
+	overflow:hidden;
+	display:block;
+	white-space:nowrap;
+}
+.swiper-slide a{
+	padding-right: 5px;
+	padding-left: 5px;
+}

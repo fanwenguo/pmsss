@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="top">
+            <header class="header container-fluid">
+                <span class="col-xs-2 center-block">
+					<button class="back"><</button>
+				</span>
+                <h2 class="col-xs-8 text-center">
+                    模板商场
+                </h2>
+                <span class="col-xs-2"></span>
+            </header>
+            <nav class="nav container-fluid">
+                <a href="javascript:;" class="col-xs-4" style="color:#33bdad">最新</a>
+                <a href="javascript:;" class="col-xs-4">最热</a>
+                <a href="javascript:;" class="col-xs-4">免费</a>
+                <!--i的宽度为a标签的宽度-->
+                <i class="line"></i>
+            </nav>
+        </div>
+        <div class="bottom">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="list1 clearfix">
+
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div style="height: 2000px;">22222</div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div style="height: 2000px;">33333</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="js/swiper-3.4.2.min.js"></script>
+<script src="js/iscroll.js"></script>
+<script src="js/ajax.js"></script>
+<script>
+    //导航
+
+    function nav() {
+        //计算i标签的宽度
+        var nav = document.querySelector('.nav'),
+            navA = nav.querySelectorAll('a'),
+            line = document.querySelector('.line');
+        line.style.width = navA[0].offsetWidth + 'px';
+        for (let i = 0, len = navA.length; i < len; i++) {
+            navA[i].onclick = function() {
+                mySwiper.slideTo(i);
+                change(i);
+            }
+        }
+        var mySwiper = new Swiper('.swiper-container', {
+            onSlideChangeStart: function(e) {
+                var ind = e.activeIndex;
+                change(ind);
+            }
+        })
+
+        function change(i) {
+            var len = navA.length;
+            for (var j = 0; j < len; j++) {
+                navA[j].style.color = "#999";
+            }
+            navA[i].style.color = "#33bdad";
+            line.style.transform = 'translateX(' + (i * 100) + '%)';
+            //指定滚动条位置
+            myiscroll0.scrollTo(0, 0, 0);
+            myiscroll1.scrollTo(0, 0, 0);
+            myiscroll2.scrollTo(0, 0, 0);
+        }
+
+        var div = document.querySelectorAll('.swiper-slide');
+        for (var i = 0; i < div.length; i++) {
+            window['myiscroll' + i] = new IScroll(div[i], {
+                scrollbars: true,
+            })
+        }
+        /**/
+        $.ajax({
+            url: 'data/data.json',
+            data: {
+                name: 'zs',
+                age: 13
+            },
+            success: function(d) {
+                var d = JSON.parse(d).data;
+                var str = "";
+                var list1 = document.querySelector('.list1');
+                d.forEach(function(v, i) {
+                    str += `<a href="javascript:;" class="col-xs-4">
+								<dl>
+									<dt style="height:100px"><img src="${v.img}" alt=""><span>${v.num}人购买</span></dt>
+									<dd><h3>${v.title}</h3><b>$ ${v.pice}</b></dd>
+								</dl>
+							</a>`;
+                })
+                list1.innerHTML = str;
+                myiscroll0.refresh();
+            }
+        })
+    }
+
+    nav();
+</script>
+
+</html>
